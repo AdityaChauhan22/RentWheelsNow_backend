@@ -2,6 +2,8 @@ const catchAsync = require('../utils/catchAsync')
 const User = require('../models/userModel')
 const jwt = require('jsonwebtoken');
 const AppError = require('../utils/appError');
+const cors = require('cors');
+const express = require('express');
 
 const signToken = id => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -84,13 +86,13 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 exports.logout = catchAsync(async (req, res, next) => {
-    // console.log("here in authcontroller");
+   
     res.cookie('token', null, {
         expires: new Date(Date.now()),
         httpsOnly: true,
     });
     res.user = undefined;
-    res.status(200).json({
+    res.status(201).json({
         status: "success",
         message: "Logout Success"
     });
