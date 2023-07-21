@@ -84,9 +84,10 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 exports.logout = catchAsync(async (req, res, next) => {
+    // console.log("here in authcontroller");
     res.cookie('token', null, {
         expires: new Date(Date.now()),
-        httpOnly: true,
+        httpsOnly: true,
     });
     res.user = undefined;
     res.status(200).json({
