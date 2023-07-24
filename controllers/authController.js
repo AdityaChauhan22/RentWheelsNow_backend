@@ -17,7 +17,7 @@ const createSendToken = (user, statusCode, req, res) => {
         expires: new Date(
             Date.now() + (process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000)
         ),
-        httpOnly: true,
+        httpsOnly: true,
     }
 
     user.password = undefined;
@@ -86,13 +86,13 @@ exports.login = catchAsync(async (req, res, next) => {
 })
 
 exports.logout = catchAsync(async (req, res, next) => {
-   
+//    console.log()
     res.cookie('token', null, {
         expires: new Date(Date.now()),
         httpsOnly: true,
     });
     res.user = undefined;
-    res.status(201).json({
+    res.status(200).json({
         status: "success",
         message: "Logout Success"
     });
